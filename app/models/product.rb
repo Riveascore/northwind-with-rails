@@ -10,6 +10,8 @@ class Product < ApplicationRecord
   scope :product_code_like, ->(query) { where('product_code LIKE ?', "%#{query}%") }
   scope :product_name_like, ->(query) { where('product_name LIKE ?', "%#{query}%") }
   scope :product_code_or_product_name_like, -> (query) { product_code_like(query).or(product_name_like(query)) }
+
+  belongs_to :category, class_name: "Category", foreign_key: "categoryid"
   
   def self.name_like(q)
     products = product_code_or_product_name_like(q)
