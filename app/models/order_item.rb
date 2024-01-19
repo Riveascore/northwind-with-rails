@@ -1,4 +1,7 @@
 class OrderItem < ApplicationRecord
+
+  # self.table_name = 'order_details'
+  
   belongs_to :order
   belongs_to :product  
 

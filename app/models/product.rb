@@ -12,6 +12,29 @@ class Product < ApplicationRecord
   scope :product_code_or_product_name_like, -> (query) { product_code_like(query).or(product_name_like(query)) }
 
   belongs_to :category, class_name: "Category", foreign_key: "categoryid"
+
+  has_many :order_details, class_name: "OrderDetail", foreign_key: "productid"
+
+  scope :average_quantity_by_product_name, -> do
+    joins(:order_details)
+      .group(:productname)
+      .select(
+        :productname, 
+        'ROUND(AVG(quantity)) AS average_quantity'
+      )
+      .order('average_quantity DESC')
+  end
+
+  class << self
+
+    def average_quantity_by_product
+      average_quantity_by_product_name.to_a.pluck(
+        :productname,
+        :average_quantity
+      )
+    end
+    
+  end
   
   def self.name_like(q)
     products = product_code_or_product_name_like(q)
