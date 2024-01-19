@@ -20,3 +20,5 @@ group :development, :test do
 end
 
 
+
+gem "yard", "~> 0.9.34"
