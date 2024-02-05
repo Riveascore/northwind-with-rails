@@ -9,7 +9,7 @@ class Order < ApplicationRecord
   has_many :order_details, class_name: "OrderDetail", foreign_key: "orderid"
 
   belongs_to :employee 
-  belongs_to :customer
+  belongs_to :customer, class_name: 'Customer', foreign_key: 'customerid'
   belongs_to :address
 
 end

@@ -16,6 +16,6 @@ class Customer < ApplicationRecord
     customers.uniq
   end
   
-  has_many :orders
+  has_many :orders, foreign_key: 'customerid'
 
 end
