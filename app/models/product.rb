@@ -12,6 +12,7 @@ class Product < ApplicationRecord
   scope :product_code_or_product_name_like, -> (query) { product_code_like(query).or(product_name_like(query)) }
 
   belongs_to :category, class_name: "Category", foreign_key: "categoryid"
+  belongs_to :supplier, class_name: "Supplier", foreign_key: "supplierid"
 
   has_many :order_details, class_name: "OrderDetail", foreign_key: "productid"
 
